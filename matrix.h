@@ -14,6 +14,8 @@ private:
     int m_row;
     int m_col;
     friend class Mapa;
+    friend class ListaMapa;
+    friend class Nodo;
 public:
     Matrix():m_row(0),m_col(0){}
     Matrix(int,int);
@@ -27,6 +29,8 @@ public:
     }
     Matrix<T> operator+ (const Matrix &o);
     void operator= (const Matrix &o);
+    bool operator== (const Matrix &o);
+
     void resizeCol(int size);
     void insertCol(const vector<T> xs);
     void inicializar();
@@ -40,11 +44,13 @@ public:
 
 template<>
 class Matrix<char>{
-private:
+public:
     char **m_matrix;
     int m_row;
     int m_col;
     friend class Mapa;
+    friend class Nodo;
+    friend class ListaMapa;
 public:
     Matrix():m_row(0),m_col(0){}
     Matrix(const vector<string> xs):m_row(xs.size()),m_col(xs[0].length()){
@@ -62,7 +68,7 @@ public:
             delete[] m_matrix[i];
         delete[] m_matrix;
     }
-    void  operator=(const Matrix &o){
+    void operator=(const Matrix &o){
         m_row=o.m_row;
         m_col=o.m_col;
         m_matrix=new char*[m_row];
@@ -74,6 +80,16 @@ public:
                 *(*(m_matrix + i) + j)=*(*(o.m_matrix + i) + j);
             }
         }
+    }
+    inline bool operator==(const Matrix &o){
+        for(int i=0;i<m_row;i++){
+            for(int j=0;j<m_col;j++){
+                if(*(*(m_matrix + i) + j) != *(*(o.m_matrix + i) + j)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 };
 
@@ -182,6 +198,18 @@ void Matrix<T>::operator=(const Matrix &o){
             *(*(m_matrix + i) + j)=*(*(o.m_matrix + i) + j);
         }
     }
+}
+
+template<class T>
+bool Matrix<T>::operator==(const Matrix &o){
+    for(int i=0;i<m_row;i++){
+        for(int j=0;j<m_col;j++){
+            if(*(*(m_matrix + i) + j) != *(*(o.m_matrix + i) + j)){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 template<class T>

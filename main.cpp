@@ -51,12 +51,14 @@ int main(int argc, char **argv){
     install_keyboard();
     set_color_depth(32);
     set_gfx_mode(GFX_AUTODETECT_WINDOWED,880,600,0,0);
-    //ListaMapa<Mapa> xs;
+    ListaMapa xs;
     Mapa A(m);
     Mapa B(n);
-    //xs.push(A);
-    //xs.push(B);
-    //xs.top().imprimir();
-    A.imprimir();
+    xs.push(A);
+    xs.push(B);
+    xs.tail().imprimir();
+    //Nodo *pt=xs.Head();
+    //pt->m_next->m_key.imprimir();
+    //A.imprimir();
 }
 END_OF_MAIN();

@@ -10,14 +10,33 @@ private:
     Matrix<char> m_mapa;
     BITMAP *m_buffer;
     BITMAP *m_roca;
-    template<class U> friend class Nodo;
-    template<class U> friend class ListaMapa;
+    friend class Nodo;
+    friend class ListaMapa;
 public:
+    Mapa(const Mapa &m);
+    void operator=(const Mapa &o);
+    bool operator==(const Mapa &o);
     Mapa(const vector<string> xs);
     void dibujar_mapa();
     void pantalla();
     void imprimir();
 };
+
+Mapa::Mapa(const Mapa &m){
+    m_mapa=m.m_mapa;
+    this->m_buffer=m.m_buffer;
+    this->m_roca=m.m_roca;
+}
+
+void Mapa::operator=(const Mapa &o){
+    m_mapa=o.m_mapa;
+    this->m_buffer=o.m_buffer;
+    this->m_roca=o.m_roca;
+}
+
+bool Mapa::operator==(const Mapa &o){
+    return m_mapa==o.m_mapa;
+}
 
 Mapa::Mapa(const vector<string> xs){
     Matrix<char> temp(xs);
