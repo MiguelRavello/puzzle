@@ -47,7 +47,7 @@ ListaMapa::ListaMapa(const ListaMapa &m){
     Nodo *xs;
     xs=m.m_head;
     while(xs!=NULL){
-        this->push(xs->getKey());
+        this->push(xs->m_key);
         xs=xs->m_next;
     }
     delete xs;
@@ -57,7 +57,7 @@ void ListaMapa::operator=(const ListaMapa &o){
     Nodo *xs;
     xs=o.m_head;
     while(xs!=NULL){
-        this->push(xs->getKey());
+        this->push(xs->m_key);
         xs=xs->m_next;
     }
     delete xs;
@@ -169,12 +169,12 @@ ListaMapa ListaMapa::operator-(ListaMapa &o){
     Nodo *xs;
 	xs=this->m_head;
 	while(xs!=NULL){
-		rpta.push(xs->getKey());
+		rpta.push(xs->m_key);
 		xs=xs->m_next;
 	}
     xs=o.m_head;
     while(xs!=NULL){
-        rpta.xOR(xs->getKey());
+        rpta.xOR(xs->m_key);
         xs=xs->m_next;
     }
     return rpta;
@@ -186,12 +186,12 @@ ListaMapa ListaMapa::operator+(ListaMapa &o){
     Nodo *xs;
     xs=this->m_head;
     while(xs!=NULL){
-        rpta.push(xs->getKey());
+        rpta.push(xs->m_key);
         xs=xs->m_next;
     }
     xs=o.m_head;
     while(xs!=NULL){
-        rpta.sOR(xs->getKey());
+        rpta.sOR(xs->m_key);
         xs=xs->m_next;
     }
     return rpta;
