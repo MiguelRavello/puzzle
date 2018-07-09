@@ -14,8 +14,8 @@ private:
     int m_row;
     int m_col;
     friend class Mapa;
-    friend class ListaMapa;
-    friend class Nodo;
+    template<class U> friend class Lista;
+    template<class U> friend class Nodo;
 public:
     Matrix():m_row(0),m_col(0){}
     Matrix(int,int);
@@ -49,8 +49,8 @@ public:
     int m_row;
     int m_col;
     friend class Mapa;
-    friend class Nodo;
-    friend class ListaMapa;
+    template<class U> friend class Nodo;
+    template<class U> friend class Lista;
 public:
     Matrix():m_row(0),m_col(0){}
     Matrix(const vector<string> xs):m_row(xs.size()),m_col(xs[0].length()){

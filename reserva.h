@@ -1,81 +1,77 @@
-#ifndef LISTA_H
+/* #ifndef LISTA_H
 #define LISTA_H
 
 #include"mapa.h"
 
-template<class T>
 class Nodo{
 private:
-    T m_key;
-    Nodo<T> *m_next;
-    Nodo<T> *m_back;
-    template<class U> friend class Lista;
+    Mapa m_key;
+    Nodo *m_next;
+    Nodo *m_back;
+    friend class ListaMapa;
 public:
-    Nodo(const T val=0):m_key(val), m_next(NULL), m_back(NULL) {}
-    Nodo(const Nodo<T> *o):m_key(o->m_key), m_next(o->m_next), m_back(o->m_back) {}
-    void setKey(const T val) {  m_key=val;}
-    T getKey() {    return this->m_key;}
+    Nodo(const Mapa val):m_key(val), m_next(NULL), m_back(NULL) {}
+    Nodo(const Nodo *o):m_key(o->m_key), m_next(o->m_next), m_back(o->m_back) {}
+    void setKey(const Mapa val) {  m_key=val;}
+    Mapa getKey() {    return this->m_key;}
 };
 
-template<class T>
-class Lista {
+class ListaMapa {
 private:
     int m_size;
-    Nodo<T> *m_head;
-    Nodo<T> *m_cola;
     //template<class U> friend class Hero;
+    Nodo *m_head;
+    Nodo *m_cola;
+
 public:
-    Lista():m_head(NULL), m_cola(NULL), m_size(0) {}
-    Lista(const Lista &m);
-    void setLista(vector<T> xs);
-    void push(const T);
+    ListaMapa():m_head(NULL), m_cola(NULL), m_size(0) {}
+    ListaMapa(const ListaMapa &m);
+    void setListaMapa(vector<Mapa> xs);
+    void push(const Mapa);
     void pop_head();
     int getLen(){   return m_size;}
     bool empty();
-    T top();
-    T tail();
-    Nodo<T>* Head(){    return m_head;}
-    Nodo<T>* Cola(){    return m_cola;}
-    void xOR(T); //para la resta
-    void sOR(T); // para la suma
 
-    void operator=(const Lista &o);
-    Lista<T> operator+(Lista &o);
-    Lista<T> operator-(Lista &o);
+    Mapa top();
+    Mapa tail();
+    Nodo* Head(){   return m_head;}
+    Nodo* Cola(){   return m_cola;}
+    void xOR(Mapa); //para la resta   error con const
+    void sOR(Mapa); // para la suma
+    void operator=(const ListaMapa &o);
+    ListaMapa operator+(ListaMapa &o);
+    ListaMapa operator-(ListaMapa &o);
 };
 
-template<class T>
-Lista<T>::Lista(const Lista &m){
-    Nodo<T> *xs;
+ListaMapa::ListaMapa(const ListaMapa &m){
+    Nodo *xs;
     xs=m.m_head;
     while(xs!=NULL){
-        this->push(xs->getKey());
+        this->push(xs->m_key);
         xs=xs->m_next;
     }
     delete xs;
 }
 
-template<class T>
-void Lista<T>::operator=(const Lista &o){
-    Nodo<T> *xs;
+void ListaMapa::operator=(const ListaMapa &o){
+    Nodo *xs;
     xs=o.m_head;
     while(xs!=NULL){
-        this->push(xs->getKey());
+        this->push(xs->m_key);
         xs=xs->m_next;
     }
     delete xs;
 }
 
-template<class T>
-void Lista<T>::push(const T val){
-    Nodo<T> *xs=new Nodo<T>(val);
+void ListaMapa::push(const Mapa val){
+    Nodo *xs=new Nodo(val);
     if(m_head==NULL){
         m_head=xs;
         m_cola=xs;
         m_size++;
     }
     else{
-        Nodo<T>* prev, *cur;
+        Nodo* prev, *cur;
         prev=m_head;
         cur=m_head->m_next;
         while(cur!=NULL){
@@ -83,20 +79,19 @@ void Lista<T>::push(const T val){
             cur=cur->m_next;
         }
         prev->m_next=xs;
+        xs->m_back=prev;
         m_cola=xs;
         m_size++;
     }
 }
 
-template<class T>
-void Lista<T>::setLista(vector<T> xs){
+void ListaMapa::setListaMapa(vector<Mapa> xs){
     for(int i=0;i<xs.size();i++)
         this->push(xs[i]);
 }
 
-template<class T>
-void Lista<T>::pop_head(){
-    Nodo<T>* prev, *cur;
+void ListaMapa::pop_head(){
+    Nodo* prev, *cur;
     prev=m_head;
     cur=m_head->m_next;
     if(prev==NULL){
@@ -112,26 +107,22 @@ void Lista<T>::pop_head(){
     }
 }
 
-template<class T>
-bool Lista<T>::empty(){
+bool ListaMapa::empty(){
     if(m_head==NULL)
         return true;
     return false;
 }
 
-template<class T>
-T Lista<T>::top(){
+Mapa ListaMapa::top(){
     return m_head->getKey();
 }
 
-template<class T>
-T Lista<T>::tail(){
+Mapa ListaMapa::tail(){
     return m_cola->getKey();
 }
 
-template<class T>
-void Lista<T>::xOR(T e){
-    Nodo<T> *prev, *cur, *victima;
+void ListaMapa::xOR(Mapa e){
+    Nodo *prev, *cur, *victima;
     prev=this->m_head;
     cur=this->m_head->m_next;
     if(prev->m_key == e){
@@ -155,9 +146,8 @@ void Lista<T>::xOR(T e){
     }
 }
 
-template<class T>
-void Lista<T>::sOR(T e){
-    Nodo<T> *xs;
+void ListaMapa::sOR(Mapa e){
+    Nodo *xs;
     xs=this->m_head;
     bool v=false;
     while(xs!=NULL){
@@ -174,10 +164,9 @@ void Lista<T>::sOR(T e){
         this->push(e);
 }
 
-template<class T>
-Lista<T> Lista<T>::operator-(Lista &o){
-    Lista<T> rpta;
-    Nodo<T> *xs;
+ListaMapa ListaMapa::operator-(ListaMapa &o){
+    ListaMapa rpta;
+    Nodo *xs;
 	xs=this->m_head;
 	while(xs!=NULL){
 		rpta.push(xs->m_key);
@@ -192,10 +181,9 @@ Lista<T> Lista<T>::operator-(Lista &o){
 
 }
 
-template<class T>
-Lista<T> Lista<T>::operator+(Lista &o){
-    Lista<T> rpta;
-    Nodo<T> *xs;
+ListaMapa ListaMapa::operator+(ListaMapa &o){
+    ListaMapa rpta; // No me reconoce el constructor copia ListaMapa r=*this;
+    Nodo *xs;
     xs=this->m_head;
     while(xs!=NULL){
         rpta.push(xs->m_key);
@@ -209,4 +197,4 @@ Lista<T> Lista<T>::operator+(Lista &o){
     return rpta;
 }
 
-#endif
+#endif */

@@ -32,10 +32,10 @@ vector<string> n={
   "X XXX XX XXXXXXXXXXX XX XXX X",
   "X     XX     XXX     XX     X",
   "X XXX XXXXXX XXX XXXXXX XXX X",
+  "X XXX XXo           oXX XXX X",
+  "      XX             XX      ",
   "X XXX XX             XX XXX X",
-  "      XX XXXXXXXXXXX XX      ",
-  "X XXX XX XXXXXXXXXXX XX XXX X",
-  "X XXX XX             XX XXX X",
+  "X XXX XXo           oXX XXX X",
   "X XXX XXXXXX XXX XXXXXX XXX X",
   "X     XX     XXX     XX     X",
   "X XXX XX XXXXXXXXXXX XX XXX X",
@@ -51,12 +51,14 @@ int main(int argc, char **argv){
     install_keyboard();
     set_color_depth(32);
     set_gfx_mode(GFX_AUTODETECT_WINDOWED,880,600,0,0);
-    ListaMapa xs;
+    Lista<Mapa> xs;
+    //Mapa *A=new Mapa1(m);
+    //Mapa *B=new Mapa1(n);
     Mapa A(m);
     Mapa B(n);
     xs.push(A);
     xs.push(B);
-    xs.top().imprimir();
+    xs.tail().imprimir();
     //Nodo *pt=xs.Head();
     //pt->m_next->m_key.imprimir();
     //A.imprimir();
