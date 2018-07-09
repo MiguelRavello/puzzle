@@ -13,7 +13,7 @@ private:
     T **m_matrix;
     int m_row;
     int m_col;
-    friend class Mapa;
+    friend class Mapa1;
     template<class U> friend class Lista;
     template<class U> friend class Nodo;
 public:
@@ -48,7 +48,7 @@ public:
     char **m_matrix;
     int m_row;
     int m_col;
-    friend class Mapa;
+    friend class Mapa1;
     template<class U> friend class Nodo;
     template<class U> friend class Lista;
 public:

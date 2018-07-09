@@ -51,11 +51,11 @@ int main(int argc, char **argv){
     install_keyboard();
     set_color_depth(32);
     set_gfx_mode(GFX_AUTODETECT_WINDOWED,880,600,0,0);
-    Lista<Mapa> xs;
+    Lista<Mapa2> xs;
     //Mapa *A=new Mapa1(m);
     //Mapa *B=new Mapa1(n);
-    Mapa A(m);
-    Mapa B(n);
+    Mapa2 A(m);
+    Mapa2 B(n);
     xs.push(A);
     xs.push(B);
     xs.tail().imprimir();

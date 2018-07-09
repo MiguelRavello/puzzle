@@ -2,6 +2,7 @@
 #define LISTA_H
 
 #include"mapa.h"
+#include"mapa.cpp"
 
 template<class T>
 class Nodo{
