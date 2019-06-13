@@ -46,7 +46,7 @@ public:
     T tail();
     Nodo<T>* Head(){    return m_head;}
     Nodo<T>* Cola(){    return m_cola;}
-    void xOR(T); //para la resta
+    void xOR(T); //para la resta; remueve el nodo que tenga el valor q le piden;
     void sOR(T); // para la suma
 
     void operator=(const Lista &o);

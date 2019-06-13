@@ -15,6 +15,7 @@ template<class T>
 Lista<T>::Lista(const Lista &m){
     Nodo<T> *xs;
     xs=m.m_head;
+    m_size=0;
     while(xs!=NULL){
         this->push(xs->m_key);
         xs=xs->m_next;
@@ -104,7 +105,7 @@ void Lista<T>::xOR(T e){
     Nodo<T> *prev, *cur, *victima;
     prev=this->m_head;
     cur=this->m_head->m_next;
-    if(prev->m_key == e){
+    if(prev->m_key == e){//si esta al comienzo de la lista
         m_head=cur;
         delete prev;
         m_head->m_back=NULL;
@@ -113,14 +114,14 @@ void Lista<T>::xOR(T e){
     else{
         while(cur!=NULL){
             if(cur->m_key == e){
-                if(cur->m_next==NULL){
+                if(cur->m_next==NULL){//si esta al final de la lista
                     prev->m_next=cur->m_next;
                     victima=cur;
                     delete victima;
                     m_size--;
                     break;
                 }
-                else{
+                else{ //si esta en medio de la lista
                     prev->m_next=cur->m_next;
                     cur->m_next->m_back=prev;
                     victima=cur;
@@ -149,38 +150,30 @@ void Lista<T>::sOR(T e){
             xs=xs->m_next;
     }
     if(v)
-        ;
+        ;//cuando existe el valor dado
     else
         this->push(e);
+        //cuando no existe el valor dado
 }
 
 template<class T>
 Lista<T> Lista<T>::operator-(Lista &o){
     Lista<T> rpta;
+    rpta=*this;
     Nodo<T> *xs;
-	xs=this->m_head;
-	while(xs!=NULL){
-		rpta.push(xs->m_key);
-		xs=xs->m_next;
-	}
     xs=o.m_head;
     while(xs!=NULL){
         rpta.xOR(xs->m_key);
         xs=xs->m_next;
     }
     return rpta;
-
 }
 
 template<class T>
 Lista<T> Lista<T>::operator+(Lista &o){
     Lista<T> rpta;
+    rpta=*this;
     Nodo<T> *xs;
-    xs=this->m_head;
-    while(xs!=NULL){
-        rpta.push(xs->m_key);
-        xs=xs->m_next;
-    }
     xs=o.m_head;
     while(xs!=NULL){
         rpta.sOR(xs->m_key);
@@ -188,4 +181,3 @@ Lista<T> Lista<T>::operator+(Lista &o){
     }
     return rpta;
 }
-
