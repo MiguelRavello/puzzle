@@ -52,7 +52,11 @@ public:
     template<class U> friend class Nodo;
     template<class U> friend class Lista;
 public:
-    Matrix():m_row(0),m_col(0){}
+    Matrix(int fila=0,int col=0):m_row(fila),m_col(col){
+        m_matrix = new char*[m_row];
+        for(int i=0;i<m_row;i++)
+            m_matrix[i]=new char[m_col];
+    }
     Matrix(const vector<string> xs):m_row(xs.size()),m_col(xs[0].length()){
         m_matrix= new char*[m_row];
         for(int k=0;k<m_row;k++)

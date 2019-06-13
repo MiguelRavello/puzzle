@@ -4,11 +4,13 @@
 #include<allegro.h>
 #include<string>
 #include"matrix.h"
-
+#include"personaje.h"
+#include"personaje.cpp"
 
 class Mapa{
 protected:
     Matrix<char> m_mapa;
+    Pacman m_usuario;
     BITMAP *m_buffer;
     BITMAP *m_balla;
     BITMAP *m_piso;
@@ -16,6 +18,7 @@ protected:
 public:
     virtual void cargar()=0;
     virtual void dibujar_mapa()=0;
+    virtual void dibujar_personaje()=0;
     virtual void pantalla()=0;
     virtual void imprimir()=0;
 };
@@ -32,6 +35,7 @@ public:
 
     void cargar();
     void dibujar_mapa();
+    void dibujar_personaje();
     void pantalla();
     void imprimir();
 };
@@ -48,6 +52,7 @@ public:
 
     void cargar();
     void dibujar_mapa();
+    void dibujar_personaje();
     void pantalla();
     void imprimir();
 };

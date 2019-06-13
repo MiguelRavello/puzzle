@@ -1,4 +1,5 @@
 #include"lista.h"
+#include"lista.cpp"
 
 vector<string> m={
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -58,7 +59,7 @@ int main(int argc, char **argv){
     Mapa2 B(n);
     xs.push(A);
     xs.push(B);
-    xs.tail().imprimir();
+    xs.top().imprimir();
     //Nodo *pt=xs.Head();
     //pt->m_next->m_key.imprimir();
     //A.imprimir();

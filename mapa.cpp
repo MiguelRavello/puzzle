@@ -2,6 +2,7 @@
 
 Mapa1::Mapa1(const Mapa1 &m){
     m_mapa=m.m_mapa;
+    m_usuario=m.m_usuario;
     this->m_buffer=m.m_buffer;
     this->m_balla=m.m_balla;
     this->m_piso=m.m_piso;
@@ -10,6 +11,7 @@ Mapa1::Mapa1(const Mapa1 &m){
 
 void Mapa1::operator=(const Mapa1 &o){
     m_mapa=o.m_mapa;
+    m_usuario=o.m_usuario;
     this->m_buffer=o.m_buffer;
     this->m_balla=o.m_balla;
     this->m_piso=o.m_piso;
@@ -32,6 +34,8 @@ void Mapa1::cargar(){
     m_balla = load_bitmap("./soporte/roca.bmp",NULL);
     m_piso  = load_bitmap("./soporte/level1/mpiso.bmp",NULL);
     m_star  = load_bitmap("./soporte/level1/mstar.bmp",NULL);
+    //m_usuario.m_bmp = load_bitmap("./soporte/pacman.bmp",NULL);
+    //m_usuario.m_personaje = create_bitmap(33,33);
 }
 
 void Mapa1::dibujar_mapa(){
@@ -51,10 +55,20 @@ void Mapa1::pantalla(){
     blit(m_buffer,screen,0,0,0,0,880,600);
 }
 
+
+void Mapa1::dibujar_personaje(){
+    blit(m_usuario.m_bmp, m_usuario.m_personaje ,m_usuario.m_dir*33,0,0,0,33,33);
+    draw_sprite(m_buffer,m_usuario.m_personaje,m_usuario.m_px,m_usuario.m_py);
+}
+
 void Mapa1::imprimir(){
     while(!key[KEY_ESC]){
+        m_usuario.setDir();
+        m_usuario.setPos();
         dibujar_mapa();
+        dibujar_personaje();
         pantalla();
+        rest(140);
     }
 }
 
@@ -91,6 +105,8 @@ void Mapa2::cargar(){
     m_balla = load_bitmap("./soporte/level1/mballa.bmp",NULL);
     m_piso  = load_bitmap("./soporte/level1/mpiso.bmp",NULL);
     m_star  = load_bitmap("./soporte/level1/mstar.bmp",NULL);
+   // m_usuario.m_bmp = load_bitmap("./soporte/pacman.bmp",NULL);
+   // m_usuario.m_personaje = create_bitmap(33,33);
 }
 
 void Mapa2::dibujar_mapa(){
@@ -110,10 +126,20 @@ void Mapa2::pantalla(){
     blit(m_buffer,screen,0,0,0,0,880,600);
 }
 
+void Mapa2::dibujar_personaje(){
+    blit(m_usuario.m_bmp, m_usuario.m_personaje ,(m_usuario.m_dir)*33 ,0,0,0,33,33);
+    draw_sprite(m_buffer,m_usuario.m_personaje,m_usuario.m_px,m_usuario.m_py);
+}
+
 void Mapa2::imprimir(){
     while(!key[KEY_ESC]){
+        m_usuario.setDir();
+        m_usuario.setPos();
+        clear(m_buffer);
         dibujar_mapa();
+        dibujar_personaje();
         pantalla();
+        rest(50);
     }
 }
 
