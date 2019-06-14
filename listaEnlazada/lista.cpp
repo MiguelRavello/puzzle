@@ -181,3 +181,33 @@ Lista<T> Lista<T>::operator+(Lista &o){
     }
     return rpta;
 }
+
+template<class T>
+void Iterador<T>::inicio(){
+    this->m_indice=this->m_lista->m_head;
+}
+
+template<class T>
+void Iterador<T>::fin(){
+    this->m_indice=this->m_lista->m_cola;
+}
+
+template<class T>
+void Iterador<T>::siguiente(){
+    this->m_indice=this->m_indice->m_next;
+}
+
+template<class T>
+void Iterador<T>::anterior(){
+    this->m_indice=this->m_indice->m_back;
+}
+
+template<class T>
+bool Iterador<T>::isDone(){
+    return m_indice!=NULL;
+}
+
+template<class T>
+T Iterador<T>::currentItem(){
+    return m_indice->m_key;
+}

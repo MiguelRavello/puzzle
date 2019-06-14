@@ -9,6 +9,9 @@ template<class T>
 class Lista;
 
 template<class T>
+class Iterador;
+
+template<class T>
 ostream& operator<< (ostream&, const Lista<T>&);
 
 template<class T>
@@ -18,6 +21,7 @@ private:
     Nodo<T> *m_next;
     Nodo<T> *m_back;
     template<class U> friend class Lista;
+    template<class U> friend class Iterador;
 public:
     Nodo(const T val=0):m_key(val), m_next(NULL), m_back(NULL){}
     Nodo(const Nodo<T> *o):m_key(o->m_key), m_next(o->m_next), m_back(o->m_back){}
@@ -33,6 +37,7 @@ private:
     int m_size;
     Nodo<T> *m_head;
     Nodo<T> *m_cola;
+    template<class U> friend class Iterador;
     friend ostream& operator<< <>(ostream& out, const Lista&);
 public:
     Lista():m_head(NULL), m_cola(NULL), m_size(0) {}
@@ -52,6 +57,22 @@ public:
     void operator=(const Lista &o);
     Lista<T> operator+(Lista &o);
     Lista<T> operator-(Lista &o);
+    Iterador<T>* crearIterador() const;
+};
+
+template<class T>
+class Iterador{
+private:
+    Lista<T> *m_lista;
+    Nodo<T> *m_indice;
+public:
+    Iterador(const Lista<T> *m):m_lista(m) {}
+    void inicio();
+    void fin();
+    void siguiente();
+    void anterior();
+    bool isDone();
+    T currentItem();
 };
 
 #endif
