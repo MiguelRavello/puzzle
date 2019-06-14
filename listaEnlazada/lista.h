@@ -66,6 +66,9 @@ private:
     Lista<T> *m_lista;
     Nodo<T> *m_indice;
 public:
+    enum{
+        Nada, Adelante, Atras, Imprimir, Inicio, Fin
+    };
     Iterador(const Lista<T> *m):m_lista(m) {}
     void inicio();
     void fin();
@@ -73,6 +76,7 @@ public:
     void anterior();
     bool isDone();
     T currentItem();
+    void testIterador(int);
 };
 
 #endif

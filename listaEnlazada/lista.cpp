@@ -183,6 +183,11 @@ Lista<T> Lista<T>::operator+(Lista &o){
 }
 
 template<class T>
+Iterator<T>* Lista<T>::crearIterador() const{
+    return new Iterador(this);
+}
+
+template<class T>
 void Iterador<T>::inicio(){
     this->m_indice=this->m_lista->m_head;
 }
@@ -210,4 +215,18 @@ bool Iterador<T>::isDone(){
 template<class T>
 T Iterador<T>::currentItem(){
     return m_indice->m_key;
+}
+
+template<class T>
+void Iterador<T>::testIterador(int ans){
+    if(ans==Adelante)
+        m_indice=m_indice->m_next;
+    else if(ans==Atras)
+        m_indice=m_indice->m_back;
+    else if(ans==Imprimir)
+        cout<<m_indice->m_key<<endl;
+    else if(ans==Inicio)
+        m_indice=m_lista->m_head;
+    else if(ans==Fin)
+        m_indice=m_lista->m_cola;
 }
