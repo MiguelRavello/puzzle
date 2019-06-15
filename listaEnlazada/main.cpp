@@ -2,6 +2,7 @@
 #include"lista.cpp" 
 
 int main(){
+    cout<<"Suma de la Lista A & B"<<endl;
     vector<int> a= {1,2,3,4};
     Lista<int> A;
     A.setLista(a);
@@ -14,6 +15,7 @@ int main(){
     C=A+B;
     cout<<C<<endl;
     cout<<"........................"<<endl;
+    cout<<"Resta de la lista Y sobre X"<<endl;
     vector<int> p= {1,2,3,4,5};
     Lista<int> X;
     X.setLista(p);
@@ -25,5 +27,26 @@ int main(){
     cout<<Y<<endl;
     Z=X-Y;
     cout<<Z<<endl;
+    cout<<"........................"<<endl;
+    cout<<"iteracion de la Lista C"<<endl;
+    Iterador<int> *it = C.crearIterador();
+    for(it->inicio();it->isDone();it->siguiente()){
+        cout<<it->currentItem()<<"<->";
+    }
+    cout<<"........................"<<endl;
+    cout<<"Personalizado"<<endl;
+    it->inicio();
+    int answer;
+    cout<<"salir(0) Adelante(1) Atras(2) Imprimir(3)"<<endl;
+    cout<<"inicio(4) y  fin(5) de la lista"<<endl;
+    cin>>answer;
+    while(answer){
+        it->testIterador(answer);
+        if(!it->isDone())
+            break;
+        cout<<"salir(0) Adelante(1) Atras(2) Imprimir(3)"<<endl;
+        cout<<"inicio(4) y  fin(5) de la lista"<<endl;
+        cin>>answer;
+    }
     return 0;
 }

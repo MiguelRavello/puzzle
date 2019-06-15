@@ -183,8 +183,13 @@ Lista<T> Lista<T>::operator+(Lista &o){
 }
 
 template<class T>
-Iterator<T>* Lista<T>::crearIterador() const{
-    return new Iterador(this);
+Iterador<T>* Lista<T>::crearIterador() const{
+    return new Iterador<T>(this);
+}
+
+template<class T>
+Iterador<T>::Iterador(const Lista<T> *m){
+    this->m_lista=m;
 }
 
 template<class T>
@@ -224,7 +229,7 @@ void Iterador<T>::testIterador(int ans){
     else if(ans==Atras)
         m_indice=m_indice->m_back;
     else if(ans==Imprimir)
-        cout<<m_indice->m_key<<endl;
+        cout<<m_indice->m_key<<"<->"<<endl;
     else if(ans==Inicio)
         m_indice=m_lista->m_head;
     else if(ans==Fin)

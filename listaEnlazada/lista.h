@@ -63,13 +63,13 @@ public:
 template<class T>
 class Iterador{
 private:
-    Lista<T> *m_lista;
+    const Lista<T> *m_lista;
     Nodo<T> *m_indice;
 public:
     enum{
         Nada, Adelante, Atras, Imprimir, Inicio, Fin
     };
-    Iterador(const Lista<T> *m):m_lista(m) {}
+    Iterador(const Lista<T> *m);
     void inicio();
     void fin();
     void siguiente();
