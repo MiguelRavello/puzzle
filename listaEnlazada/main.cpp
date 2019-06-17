@@ -42,8 +42,10 @@ int main(){
     cin>>answer;
     while(answer){
         it->testIterador(answer);
-        if(!it->isDone())
+        if(!it->isDone()){
+            cout<<"NULL pointer"<<endl;
             break;
+        }
         cout<<"salir(0) Adelante(1) Atras(2) Imprimir(3)"<<endl;
         cout<<"inicio(4) y  fin(5) de la lista"<<endl;
         cin>>answer;
