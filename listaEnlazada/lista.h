@@ -65,11 +65,13 @@ class Iterador{
 private:
     const Lista<T> *m_lista;
     Nodo<T> *m_indice;
+    template<class U> friend class Lista;
 public:
     enum{
         Nada, Adelante, Atras, Imprimir, Inicio, Fin
     };
     Iterador(const Lista<T> *m);
+    Iterador(const Iterador &m);
     void inicio();
     void fin();
     void siguiente();
@@ -77,6 +79,11 @@ public:
     bool isDone();
     T currentItem();
     void testIterador(int);
+    void operator++(){  this->m_indice=this->m_indice->m_next; }
+    void operator++(int){   this->m_indice=this->m_indice->m_next; }
+    void operator--(){  m_indice=m_indice->m_back;}
+    void operator--(int){  m_indice=m_indice->m_back;}
+    T& operator*(){ return m_indice->m_key;}
 };
 
 #endif

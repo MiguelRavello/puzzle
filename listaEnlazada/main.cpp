@@ -30,9 +30,12 @@ int main(){
     cout<<"........................"<<endl;
     cout<<"iteracion de la Lista C"<<endl;
     Iterador<int> *it = C.crearIterador();
-    for(it->inicio();it->isDone();it->siguiente()){
-        cout<<it->currentItem()<<"<->";
-    }
+    for(it->inicio();it->isDone(); ++(*it) )
+        cout<< *(*it) <<"->";
+    cout<<endl;
+    for(it->fin();it->isDone();--(*it))
+        cout<<"<-"<< *(*it);
+    cout<<endl;
     cout<<"........................"<<endl;
     cout<<"Personalizado"<<endl;
     it->inicio();

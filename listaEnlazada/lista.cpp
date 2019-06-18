@@ -193,6 +193,11 @@ Iterador<T>::Iterador(const Lista<T> *m){
 }
 
 template<class T>
+Iterador<T>::Iterador(const Iterador &m){
+    this->m_lista=m.m_lista;
+}
+
+template<class T>
 void Iterador<T>::inicio(){
     this->m_indice=this->m_lista->m_head;
 }
