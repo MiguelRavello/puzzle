@@ -186,7 +186,7 @@ template<class T>
 Iterador<T>* Lista<T>::crearIterador() const{
     return new Iterador<T>(this);
 }
-
+/***********************************************************************/
 template<class T>
 Iterador<T>::Iterador(const Lista<T> *m){
     this->m_lista=m;
@@ -234,4 +234,52 @@ void Iterador<T>::testIterador(int ans){
         m_indice=m_lista->m_head;
     else if(ans==Fin)
         m_indice=m_lista->m_cola;
+}
+/**************************************************************************/
+Iterador<Mapa1>::Iterador(const Lista<Mapa1> *m){
+    this->m_lista=m;
+}
+
+void Iterador<Mapa1>::inicio(){
+    this->m_indice=this->m_lista->m_head;
+}
+
+void Iterador<Mapa1>::fin(){
+    this->m_indice=this->m_lista->m_cola;
+}
+
+void Iterador<Mapa1>::siguiente(){
+    this->m_indice=this->m_indice->m_next;
+}
+
+void Iterador<Mapa1>::anterior(){
+    this->m_indice=this->m_indice->m_back;
+}
+
+bool Iterador<Mapa1>::isDone(){
+    return m_indice!=NULL;
+}
+
+Mapa1 Iterador<Mapa1>::currentItem(){
+    return m_indice->m_key;
+}
+
+void Iterador<Mapa1>::testIterador(){
+    while(!key[KEY_ESC]){
+        m_indice->m_key.m_usuario.setDir();
+        m_indice->m_key.setPos();
+        if(m_indice->m_key.m_usuario.m_px <= -30){
+            m_indice=m_indice->m_back;
+            m_indice->m_key.m_usuario.m_px=840;
+        }
+        else if(m_indice->m_key.m_usuario.m_px >= 870){
+            m_indice=m_indice->m_next;
+            m_indice->m_key.m_usuario.m_px=30;
+        }
+        clear(m_indice->m_key.m_buffer);
+        m_indice->m_key.dibujar_mapa();
+        m_indice->m_key.dibujar_personaje();
+        m_indice->m_key.pantalla();
+        rest(70);
+    }
 }

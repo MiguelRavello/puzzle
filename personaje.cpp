@@ -8,7 +8,7 @@ Personaje::Personaje(const Personaje &o){
     this->m_py=o.m_py;
 }
 
-Pacman::Pacman(const int dir=2,const int x=10,const int y=10):Personaje(dir,x,y){
+Pacman::Pacman(const int dir=2,const int x=30,const int y=30):Personaje(dir,x,y){
     this->load();
 }
 
@@ -44,12 +44,4 @@ void Pacman::setDir(){
         m_dir=3;
     else
         m_dir=-1; 
-}
-
-void Pacman::setPos(){
-    if(m_dir==0) m_px -=30; // <-
-    else if(m_dir==1) m_px +=30; // ->
-    else if(m_dir==2) m_py -=30; // ^up
-    else if(m_dir==3) m_py +=30; // v down
-    else if(m_dir==-1) ;
 }

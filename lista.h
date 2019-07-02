@@ -78,4 +78,20 @@ public:
     void testIterador(int);
 };
 
+template<>
+class Iterador<Mapa1>{
+private:
+    const Lista<Mapa1> *m_lista;
+    Nodo<Mapa1> *m_indice;
+public:
+    Iterador(const Lista<Mapa1> *m);
+    void inicio();
+    void fin();
+    void siguiente();
+    void anterior();
+    bool isDone();
+    Mapa1 currentItem();
+    void testIterador();
+};
+
 #endif

@@ -15,12 +15,11 @@ public:
     int m_py; // posicion y
 public:
     //me pedia Personaje();
-    Personaje(const int dir=2,const int x=10,const int y=10):m_dir(dir),m_px(x),m_py(y){}
+    Personaje(const int dir=2,const int x=30,const int y=30):m_dir(dir),m_px(x),m_py(y){}
     Personaje(const Personaje &o);
     virtual void load()=0;
   //virtual void dibujar_personaje()=0;
     virtual void setDir()=0;
-    virtual void setPos()=0;
 };
 
 //clase prueba
@@ -35,7 +34,6 @@ public:
     void load();
   //void dibujar_personaje();
     void setDir();
-    void setPos();
 };
 
 #endif

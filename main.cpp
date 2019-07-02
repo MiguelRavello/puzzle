@@ -52,16 +52,16 @@ int main(int argc, char **argv){
     install_keyboard();
     set_color_depth(32);
     set_gfx_mode(GFX_AUTODETECT_WINDOWED,880,600,0,0);
-    Lista<Mapa2> xs;
+    Lista<Mapa1> xs;
     //Mapa *A=new Mapa1(m);
     //Mapa *B=new Mapa1(n);
-    Mapa2 A(m);
-    Mapa2 B(n);
+    Mapa1 A(m);
+    Mapa1 B(n);
     xs.push(A);
     xs.push(B);
-    xs.top().imprimir();
-    //Nodo *pt=xs.Head();
-    //pt->m_next->m_key.imprimir();
-    //A.imprimir();
+    //xs.top().imprimir();
+    Iterador<Mapa1> *it=xs.crearIterador();
+    it->inicio();
+    it->testIterador();
 }
 END_OF_MAIN();

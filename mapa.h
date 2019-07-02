@@ -6,7 +6,7 @@
 #include"matrix.h"
 #include"personaje.h"
 #include"personaje.cpp"
-
+#include"lista.h"
 class Mapa{
 protected:
     Matrix<char> m_mapa;
@@ -17,16 +17,18 @@ protected:
     BITMAP *m_star;
 public:
     virtual void cargar()=0;
-    virtual void dibujar_mapa()=0;
-    virtual void dibujar_personaje()=0;
-    virtual void pantalla()=0;
-    virtual void imprimir()=0;
+    void dibujar_mapa();
+    void dibujar_personaje();
+    void pantalla();
+    void imprimir();
+    void setPos();
 };
 
 class Mapa1 : public Mapa{
 private:
     template<class U> friend class Nodo;
     template<class U> friend class Lista;
+    template<class U> friend class Iterador;
 public:
     Mapa1(const Mapa1 &m);
     void operator=(const Mapa1 &o);
@@ -34,16 +36,13 @@ public:
     Mapa1(const vector<string> xs);
 
     void cargar();
-    void dibujar_mapa();
-    void dibujar_personaje();
-    void pantalla();
-    void imprimir();
 };
 
 class Mapa2 : public Mapa{
 private:
     template<class U> friend class Nodo;
     template<class U> friend class Lista;
+    template<class U> friend class Iterador;
 public:
     Mapa2(const Mapa2 &m);
     void operator=(const Mapa2 &o);
@@ -51,10 +50,6 @@ public:
     Mapa2(const vector<string> xs);
 
     void cargar();
-    void dibujar_mapa();
-    void dibujar_personaje();
-    void pantalla();
-    void imprimir();
 };
 
 #endif
