@@ -3,6 +3,7 @@
 Mapa1::Mapa1(const Mapa1 &m){
     m_mapa=m.m_mapa;
     m_usuario=m.m_usuario;
+    m_bloque=m.m_bloque;
     this->m_buffer=m.m_buffer;
     this->m_balla=m.m_balla;
     this->m_piso=m.m_piso;
@@ -12,6 +13,7 @@ Mapa1::Mapa1(const Mapa1 &m){
 void Mapa1::operator=(const Mapa1 &o){
     m_mapa=o.m_mapa;
     m_usuario=o.m_usuario;
+    m_bloque=o.m_bloque;
     this->m_buffer=o.m_buffer;
     this->m_balla=o.m_balla;
     this->m_piso=o.m_piso;
@@ -23,7 +25,7 @@ bool Mapa1::operator==(const Mapa1 &o){
 }
 
 
-Mapa1::Mapa1(const vector<string> xs){
+Mapa1::Mapa1(const std::vector<string> xs){
     Matrix<char> temp(xs);
     this->m_mapa=temp;
     this->cargar();
@@ -39,6 +41,8 @@ void Mapa1::cargar(){
 /************** Mapa 2 *************/
 Mapa2::Mapa2(const Mapa2 &m){
     m_mapa=m.m_mapa;
+    m_usuario=m.m_usuario;
+    m_bloque=m.m_bloque;
     this->m_buffer=m.m_buffer;
     this->m_balla=m.m_balla;
     this->m_piso=m.m_piso;
@@ -47,6 +51,7 @@ Mapa2::Mapa2(const Mapa2 &m){
 
 void Mapa2::operator=(const Mapa2 &o){
     m_mapa=o.m_mapa;
+    m_bloque=o.m_bloque;
     this->m_buffer=o.m_buffer;
     this->m_balla=o.m_balla;
     this->m_piso=o.m_piso;
@@ -58,7 +63,7 @@ bool Mapa2::operator==(const Mapa2 &o){
 }
 
 
-Mapa2::Mapa2(const vector<string> xs){
+Mapa2::Mapa2(const std::vector<string> xs){
     Matrix<char> temp(xs);
     this->m_mapa=temp;
     this->cargar();
@@ -92,6 +97,11 @@ void Mapa::pantalla(){
 void Mapa::dibujar_personaje(){
     blit(m_usuario.m_bmp, m_usuario.m_personaje ,(m_usuario.m_dir)*33 ,0,0,0,33,33);
     draw_sprite(m_buffer,m_usuario.m_personaje,m_usuario.m_px,m_usuario.m_py);
+}
+
+void Mapa::dibujar_bloque(){
+    blit(m_bloque.m_bmp,m_bloque.m_personaje,0,0,0,0,30,30);
+    draw_sprite(m_buffer,m_bloque.m_personaje,m_bloque.m_px,m_bloque.m_py);
 }
 
 void Mapa::imprimir(){
@@ -130,5 +140,47 @@ void Mapa::setPos(){
             m_usuario.m_py +=30;
         else
             m_usuario.m_dir=-1;
+    }
+}
+
+void Mapa::golpear(){
+    if(m_usuario.m_dir==0 && key[KEY_SPACE]){
+        m_bloque.m_dir=0;
+    }
+    else if(m_usuario.m_dir==1 && key[KEY_SPACE]){
+        m_bloque.m_dir=1;
+    }
+    else if(m_usuario.m_dir==2 && key[KEY_SPACE]){
+        m_bloque.m_dir=2;
+    }
+    else if(m_usuario.m_dir==3 && key[KEY_SPACE]){
+        m_bloque.m_dir=3;
+    }
+}
+
+void Mapa::movimiento_bloque(){
+    if(m_bloque.m_dir==0){
+        if(m_mapa.m_matrix[m_bloque.m_py/30][(m_bloque.m_px-30)/30]!='X')
+            m_bloque.m_px -=30;
+        else
+            m_bloque.m_dir=-1;
+    }
+    else if(m_bloque.m_dir==1){
+        if(m_mapa.m_matrix[m_bloque.m_py/30][(m_bloque.m_px+30)/30]!='X')
+            m_bloque.m_px +=30;
+        else
+            m_bloque.m_dir=-1;
+    }
+    else if(m_bloque.m_dir==2){
+        if(m_mapa.m_matrix[(m_bloque.m_py-30)/30][m_bloque.m_px/30]!='X')
+            m_bloque.m_py -=30;
+        else
+            m_bloque.m_dir=-1;
+    }
+    else if(m_bloque.m_dir==3){
+        if(m_mapa.m_matrix[(m_bloque.m_py+30)/30][m_bloque.m_px/30]!='X')
+            m_bloque.m_py +=30;
+        else
+            m_bloque.m_dir=-1;
     }
 }

@@ -4,6 +4,8 @@
 #include"mapa.h"
 #include"mapa.cpp"
 
+using std::ostream;
+
 template<class T>
 class Lista;
 
@@ -41,7 +43,7 @@ private:
 public:
     Lista():m_head(NULL), m_cola(NULL), m_size(0) {}
     Lista(const Lista &m);
-    void setLista(vector<T> xs);
+    void setLista(std::vector<T> xs);
     void push(const T);
     void pop_head();
     int getLen(){   return m_size;}
@@ -50,12 +52,7 @@ public:
     T tail();
     Nodo<T>* Head(){    return m_head;}
     Nodo<T>* Cola(){    return m_cola;}
-    void xOR(T); //para la resta; remueve el nodo que tenga el valor q le piden;
-    void sOR(T); // para la suma
-
     void operator=(const Lista &o);
-    Lista<T> operator+(Lista &o);
-    Lista<T> operator-(Lista &o);
     Iterador<T>* crearIterador() const;
 };
 

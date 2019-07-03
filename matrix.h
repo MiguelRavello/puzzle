@@ -5,7 +5,10 @@
 #include<vector>
 #include"mapa.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
+using std::cin;
 
 template<class T>
 class Matrix {
@@ -19,8 +22,8 @@ private:
 public:
     Matrix():m_row(0),m_col(0){}
     Matrix(int,int);
-    Matrix(const vector<vector<T> > xs);
-    Matrix(const vector<T> xs); //matrix m_filas x cero;
+    Matrix(const std::vector<std::vector<T> > xs);
+    Matrix(const std::vector<T> xs); //matrix m_filas x cero;
     Matrix(const Matrix &m);
     ~Matrix(){
         for(int i=0;i<m_row;i++)
@@ -32,14 +35,14 @@ public:
     bool operator== (const Matrix &o);
 
     void resizeCol(int size);
-    void insertCol(const vector<T> xs);
+    void insertCol(const std::vector<T> xs);
     void inicializar();
-    void setMatrix(const vector<vector<T> > xs);
+    void setMatrix(const std::vector<std::vector<T> > xs);
     void zerox();
     void identidad();
     void imprimir();
     void swapRow(int fila_1, int fila_2);
-    vector<T> getCol(const int pos);
+    std::vector<T> getCol(const int pos);
 };
 
 template<>
@@ -57,7 +60,7 @@ public:
         for(int i=0;i<m_row;i++)
             m_matrix[i]=new char[m_col];
     }
-    Matrix(const vector<string> xs):m_row(xs.size()),m_col(xs[0].length()){
+    Matrix(const std::vector<string> xs):m_row(xs.size()),m_col(xs[0].length()){
         m_matrix= new char*[m_row];
         for(int k=0;k<m_row;k++)
             m_matrix[k]=new char[m_col];
@@ -106,7 +109,7 @@ Matrix<T>::Matrix(int fila,int col):m_row(fila),m_col(col){
 }
 
 template<class T>
-Matrix<T>::Matrix(const vector<vector<T> > xs):m_row(xs.size()),m_col(xs[0].size()){
+Matrix<T>::Matrix(const std::vector<std::vector<T> > xs):m_row(xs.size()),m_col(xs[0].size()){
     m_matrix = new T*[m_row];
     for(int k=0;k<m_row;k++)
         m_matrix[k]=new T[m_col];
@@ -118,7 +121,7 @@ Matrix<T>::Matrix(const vector<vector<T> > xs):m_row(xs.size()),m_col(xs[0].size
 }
 
 template<class T>
-Matrix<T>::Matrix(const vector<T> xs):m_row(xs.size()),m_col(0){
+Matrix<T>::Matrix(const std::vector<T> xs):m_row(xs.size()),m_col(0){
     m_matrix = new T*[m_row];
     for(int k=0;k<m_row;k++)
         m_matrix[k]=new T[m_col];
@@ -151,7 +154,7 @@ void Matrix<T>::inicializar(){
 }
 
 template<class T>
-void Matrix<T>::setMatrix(const vector<vector<T> > xs){
+void Matrix<T>::setMatrix(const std::vector<std::vector<T> > xs){
     for(int i=0;i<m_row;i++){
         for(int j=0;j<m_col;j++)
             this->m_matrix[i][j]=xs[i][j];
@@ -242,7 +245,7 @@ void Matrix<T>::resizeCol(int nuevo){
 }
 
 template<class T>
-void Matrix<T>::insertCol(const vector<T> xs){
+void Matrix<T>::insertCol(const std::vector<T> xs){
     resizeCol(m_col+1);
     for(int i=0;i<m_row;i++)
         m_matrix[i][m_col-1]=xs[i];
@@ -264,8 +267,8 @@ void Matrix<T>::swapRow(int fila_1,int fila_2){
 }
 
 template<class T>
-vector<T> Matrix<T>::getCol(const int pos){
-    vector<T> xs;
+std::vector<T> Matrix<T>::getCol(const int pos){
+    std::vector<T> xs;
     for(int i=0;i<m_row;i++)
         xs.push_back(m_matrix[i][pos]);
     return xs;

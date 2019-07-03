@@ -59,7 +59,7 @@ void Lista<T>::push(const T val){
 }
 
 template<class T>
-void Lista<T>::setLista(vector<T> xs){
+void Lista<T>::setLista(std::vector<T> xs){
     for(int i=0;i<xs.size();i++)
         this->push(xs[i]);
 }
@@ -71,6 +71,12 @@ void Lista<T>::pop_head(){
     cur=m_head->m_next;
     if(prev==NULL){
         ;
+    }
+    else if(m_head==m_cola){
+        delete prev;
+        m_head=NULL;
+        m_cola=NULL;
+        m_size--;
     }
     else{
         m_head=cur;
@@ -98,88 +104,6 @@ T Lista<T>::top(){
 template<class T>
 T Lista<T>::tail(){
     return m_cola->m_key;
-}
-
-template<class T>
-void Lista<T>::xOR(T e){
-    Nodo<T> *prev, *cur, *victima;
-    prev=this->m_head;
-    cur=this->m_head->m_next;
-    if(prev->m_key == e){//si esta al comienzo de la lista
-        m_head=cur;
-        delete prev;
-        m_head->m_back=NULL;
-        m_size--;
-    }
-    else{
-        while(cur!=NULL){
-            if(cur->m_key == e){
-                if(cur->m_next==NULL){//si esta al final de la lista
-                    prev->m_next=cur->m_next;
-                    victima=cur;
-                    delete victima;
-                    m_size--;
-                    break;
-                }
-                else{ //si esta en medio de la lista
-                    prev->m_next=cur->m_next;
-                    cur->m_next->m_back=prev;
-                    victima=cur;
-                    delete victima;
-                    m_size--;
-                    break;
-                }
-            }
-            prev=cur;
-            cur=cur->m_next;
-        }
-    }
-}
-
-template<class T>
-void Lista<T>::sOR(T e){
-    Nodo<T> *xs;
-    xs=this->m_head;
-    bool v=false;
-    while(xs!=NULL){
-        if(e == xs->m_key){
-            v=true;
-            break;
-        }
-        else
-            xs=xs->m_next;
-    }
-    if(v)
-        ;//cuando existe el valor dado
-    else
-        this->push(e);
-        //cuando no existe el valor dado
-}
-
-template<class T>
-Lista<T> Lista<T>::operator-(Lista &o){
-    Lista<T> rpta;
-    rpta=*this;
-    Nodo<T> *xs;
-    xs=o.m_head;
-    while(xs!=NULL){
-        rpta.xOR(xs->m_key);
-        xs=xs->m_next;
-    }
-    return rpta;
-}
-
-template<class T>
-Lista<T> Lista<T>::operator+(Lista &o){
-    Lista<T> rpta;
-    rpta=*this;
-    Nodo<T> *xs;
-    xs=o.m_head;
-    while(xs!=NULL){
-        rpta.sOR(xs->m_key);
-        xs=xs->m_next;
-    }
-    return rpta;
 }
 
 template<class T>
@@ -268,6 +192,8 @@ void Iterador<Mapa1>::testIterador(){
     while(!key[KEY_ESC]){
         m_indice->m_key.m_usuario.setDir();
         m_indice->m_key.setPos();
+        m_indice->m_key.golpear();
+        m_indice->m_key.movimiento_bloque();
         if(m_indice->m_key.m_usuario.m_px <= -30){
             m_indice=m_indice->m_back;
             m_indice->m_key.m_usuario.m_px=840;
@@ -279,6 +205,7 @@ void Iterador<Mapa1>::testIterador(){
         clear(m_indice->m_key.m_buffer);
         m_indice->m_key.dibujar_mapa();
         m_indice->m_key.dibujar_personaje();
+        m_indice->m_key.dibujar_bloque();
         m_indice->m_key.pantalla();
         rest(70);
     }

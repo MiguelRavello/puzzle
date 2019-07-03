@@ -1,7 +1,7 @@
 #include"lista.h"
 #include"lista.cpp"
 
-vector<string> m={
+std::vector<string> m={
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   "X           XXXXX           X",
   "X XXX XXXXX XXXXX XXXXX XXX X",
@@ -24,7 +24,7 @@ vector<string> m={
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 };
 
-vector<string> n={
+std::vector<string> n={
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   "X           XX XX           X",
   "X XXX XXXXX XX XX XXXXX XXX X",
@@ -47,7 +47,7 @@ vector<string> n={
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 };
 
-vector<string> o={
+std::vector<string> o={
   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   "X           XX XX           X",
   "X XXX XXXXX XX XX XXXXX XXX X",
